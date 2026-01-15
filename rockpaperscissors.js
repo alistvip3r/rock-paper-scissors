@@ -19,9 +19,11 @@ function getComputerChoice() {
 }
 console.log(getComputerChoice());
 
+const input = prompt("Type rock, paper or scissors");
+const choice = String(input.toLowerCase());
+
 function getHumanChoice() {
-    const input = prompt("Type rock, paper or scissors");
-    const choice = String(input.toLowerCase());
+ 
     if (choice === 'rock'){
         return rock;
     }
@@ -36,3 +38,41 @@ function getHumanChoice() {
     }
 }
 console.log(getHumanChoice());
+
+function playRound(humanChoice, computerChoice) {
+    switch (true) {
+        case computerChoice === rock && humanChoice === scissors:{
+            console.log("You lose! Rock beats Scissors");
+            return computerScore++;
+        }
+        case computerChoice === rock && humanChoice === paper:{
+            console.log("You Win! Paper beats Rock");
+            return humanScore++;
+        }
+        case computerChoice === paper && humanChoice === rock:{
+            console.log("You lose! Paper beats Rock");
+            return computerScore++;
+        }
+        case computerChoice === paper && humanChoice === scissors:{
+            console.log("You Win! Scissors beats Paper");
+            return humanScore++;
+        }
+        case computerChoice === scissors && humanChoice === paper:{
+            console.log("You Lose! Scissors beats Paper");
+            return computerScore++;
+        }
+        case computerChoice === scissors && humanChoice === rock:{
+            console.log("You Win! Rock beats Scissors");
+            return humanScore++;
+        }
+        default: {
+            console.log("It's a Draw");
+            break;
+        }
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
