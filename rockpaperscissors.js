@@ -1,5 +1,3 @@
-let randomChoice = Math.floor(Math.random() * 3);
-console.log(randomChoice);
 const rock = "Rock";
 const paper = "Paper";
 const scissors = "Scissors";
@@ -7,7 +5,9 @@ let humanScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
-    if (randomChoice === 0) { 
+    let randomChoice = Math.floor(Math.random() * 3);
+
+    if (randomChoice === 0) {
         return rock;
     }
     else if (randomChoice === 1) {
@@ -17,51 +17,47 @@ function getComputerChoice() {
         return paper;
     }
 }
-console.log(getComputerChoice());
-
-const input = prompt("Type rock, paper or scissors");
-const choice = String(input.toLowerCase());
 
 function getHumanChoice() {
- 
-    if (choice === 'rock'){
+    const input = prompt("Type rock, paper or scissors");
+    const choice = String(input.toLowerCase());
+    if (choice === 'rock') {
         return rock;
     }
     else if (choice === 'scissors') {
         return scissors;
     }
-    else if (choice === 'paper'){
+    else if (choice === 'paper') {
         return paper;
     }
     else {
         alert('Invalid input');
     }
 }
-console.log(getHumanChoice());
 
 function playRound(humanChoice, computerChoice) {
     switch (true) {
-        case computerChoice === rock && humanChoice === scissors:{
+        case computerChoice === rock && humanChoice === scissors: {
             console.log("You lose! Rock beats Scissors");
             return computerScore++;
         }
-        case computerChoice === rock && humanChoice === paper:{
+        case computerChoice === rock && humanChoice === paper: {
             console.log("You Win! Paper beats Rock");
             return humanScore++;
         }
-        case computerChoice === paper && humanChoice === rock:{
+        case computerChoice === paper && humanChoice === rock: {
             console.log("You lose! Paper beats Rock");
             return computerScore++;
         }
-        case computerChoice === paper && humanChoice === scissors:{
+        case computerChoice === paper && humanChoice === scissors: {
             console.log("You Win! Scissors beats Paper");
             return humanScore++;
         }
-        case computerChoice === scissors && humanChoice === paper:{
+        case computerChoice === scissors && humanChoice === paper: {
             console.log("You Lose! Scissors beats Paper");
             return computerScore++;
         }
-        case computerChoice === scissors && humanChoice === rock:{
+        case computerChoice === scissors && humanChoice === rock: {
             console.log("You Win! Rock beats Scissors");
             return humanScore++;
         }
@@ -72,7 +68,13 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame() {
+    for (i = 0; i < 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+    }
+    console.log(`You win ${humanScore} rounds, Computer win ${computerScore} rounds`);
+}
 
-playRound(humanSelection, computerSelection);
+playGame();
